@@ -31,7 +31,24 @@ function App() {
   };
   // -------------------------
 
-  
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (aboutRef.current) {
+      observer.observe(aboutRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -48,7 +65,7 @@ function App() {
         <div className="hero grid md:grid-cols-2 items-center pt-10 xl:gap-0 gap-6 grid-cols-1">
           <div className="animate__animated animate__fadeInUp animate__delay-3s">
             <div className="flex items-center gap-3 mb-6 bg bg-zinc-800 w-fit p-4 rounded-2xl">
-              <img src="./assets/Professional picture.jpg" className="w-10 rounded-md" />
+              <img src="/portofolio/Professional picture.jpg"></img>
               <q>Progress is built through patience, discipline, and continuous learning.</q>
             </div>
             <h1 className="text-5xl font-bold mb-6">
@@ -63,7 +80,7 @@ function App() {
             />
             <div className="flex items-center sm:gap-4 gap-2">
               <a 
-                href="./assets/Final_Resume_Triston_Lim.pdf" 
+               href="/portofolio/Final_Resume_Triston_Lim.pdf"
                 download="Triston_Lim__CV.pdf" 
                 className="font-semibold bg-[#1a1a1a] p-4 px-6 rounded-full border border-gray-700 hover:bg-[#222] transition-colors"
               >
@@ -83,7 +100,7 @@ function App() {
               handle="tris_weak"
               status="Online"
               contactText="Contact Me"
-              avatarUrl="./assets/Professional picture.jpg"
+              avatarUrl="/portofolio/Professional picture.jpg"
               showUserInfo={true}
               enableTilt={true}
               enableMobileTilt={false}
